@@ -1,0 +1,56 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Static export only - skip Netlify's Next.js server runtime.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Hashed build assets never change, so cache them for a year.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Photos are rebuilt under the same names when swapped, so cache for a week, not forever.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/og-image.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Search-engine blocking for the preview lives in the page's robots meta tag and robots.txt,
+# driven by `spec` in src/lib/site.ts, so going live is a single switch.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Old GoDaddy URLs, so existing links and search results land on the right page.
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/care-%26-maintenance"
+  to = "/care"
+  status = 301
+
+[[redirects]]
+  from = "/care-&-maintenance"
+  to = "/care"
+  status = 301
+
+[[redirects]]
+  from = "/products"
+  to = "/materials"
+  status = 301
