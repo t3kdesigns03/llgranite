@@ -32,9 +32,9 @@ export function SectionHead({
   return (
     <div className={`${center ? "mx-auto text-center" : ""} max-w-2xl ${className}`} data-reveal>
       {kicker && <Kicker className={`${dark ? "text-brass" : "text-brass-deep"} ${center ? "justify-center" : ""}`}>{kicker}</Kicker>}
-      <Tag className={`display mt-4 text-[2.4rem] sm:text-5xl lg:text-[3.6rem] ${dark ? "text-linen" : "text-ink"}`}>{title}</Tag>
+      <Tag className={`display mt-3 text-[2.15rem] sm:mt-4 sm:text-5xl lg:text-[3.6rem] ${dark ? "text-linen" : "text-ink"}`}>{title}</Tag>
       {lede && (
-        <p className={`lede mt-5 text-[1.05rem] leading-relaxed sm:text-lg ${dark ? "text-stone-300" : "text-stone-600"}`}>{lede}</p>
+        <p className={`lede mt-3 text-base leading-relaxed sm:mt-5 sm:text-lg ${dark ? "text-stone-300" : "text-stone-600"}`}>{lede}</p>
       )}
     </div>
   );

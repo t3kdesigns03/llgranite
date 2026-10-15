@@ -13,7 +13,8 @@ const filters: { id: Filter; label: string }[] = [
 ];
 
 // Repeating rhythm of crops so the grid feels curated rather than uniform.
-const aspects = ["aspect-[4/5]", "aspect-[4/3]", "aspect-[4/5]", "aspect-square", "aspect-[4/3]", "aspect-[4/5]"];
+// Phones get a uniform two-up grid of tall cards.
+const aspects = ["sm:aspect-[4/5]", "sm:aspect-[4/3]", "sm:aspect-[4/5]", "sm:aspect-square", "sm:aspect-[4/3]", "sm:aspect-[4/5]"];
 
 /**
  * Filterable project gallery. Filters are ordinary buttons (no page reload); the grid is CSS columns,
@@ -47,14 +48,15 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
 
       <p className="sr-only" aria-live="polite">{`${shown.length} projects shown`}</p>
 
-      <div className="mt-8 gap-5 sm:columns-2 lg:columns-3 lg:gap-6">
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 sm:block sm:columns-2 sm:gap-5 lg:columns-3 lg:gap-6">
         {shown.map((p, i) => (
-          <div key={p.slug} className="mb-5 break-inside-avoid lg:mb-6">
+          <div key={p.slug} className="break-inside-avoid sm:mb-5 lg:mb-6">
             <ProjectCard
               project={p}
-              aspect={aspects[i % aspects.length]}
-              sizes="(min-width: 1024px) 31vw, (min-width: 640px) 48vw, 100vw"
-              titleClass="text-[1.6rem] sm:text-[1.7rem]"
+              aspect={`aspect-[3/4] ${aspects[i % aspects.length]}`}
+              sizes="(min-width: 1024px) 31vw, 48vw"
+              titleClass="text-[1.2rem] leading-[1.05] sm:text-[1.7rem]"
+              compact
             />
           </div>
         ))}

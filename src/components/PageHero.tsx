@@ -31,8 +31,8 @@ export default function PageHero({
         home
           ? "min-h-[max(40rem,100svh)] lg:min-h-[max(44rem,100svh)]"
           : size === "compact"
-            ? "min-h-[24rem] sm:min-h-[28rem]"
-            : "min-h-[30rem] sm:min-h-[34rem] lg:min-h-[38rem]"
+            ? "min-h-[22rem] sm:min-h-[28rem]"
+            : "min-h-[26rem] sm:min-h-[34rem] lg:min-h-[38rem]"
       }`}
     >
       <Photo name={image} alt={alt} fill priority sizes="100vw" className="-z-20" imgClassName="ken-burns" />

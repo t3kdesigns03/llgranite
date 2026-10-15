@@ -97,7 +97,7 @@ export default function QuoteForm() {
       netlify-honeypot={formspree ? undefined : "bot-field"}
       onSubmit={onSubmit}
       noValidate
-      className="space-y-6"
+      className="space-y-5 sm:space-y-6"
     >
       <input type="hidden" name="form-name" value={site.form.name} />
       <p className="hidden" aria-hidden="true">
@@ -114,7 +114,7 @@ export default function QuoteForm() {
         {err("name")}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <div>
           <label htmlFor="q-phone" className={label}>
             Phone

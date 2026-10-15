@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import QuoteCta from "@/components/QuoteCta";
+import Strengths from "@/components/Strengths";
 import { CheckIcon } from "@/components/icons";
 import { ArrowLink, Container, Kicker, SectionHead } from "@/components/ui";
 import { pageMeta } from "@/lib/meta";
@@ -27,12 +28,12 @@ export default function AboutPage() {
         lede={`Family-owned and rooted in ${site.address.city}, we fabricate and install granite, marble and quartz for homes and businesses across the area.`}
       />
 
-      <section className="py-20 sm:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+      <section className="py-14 sm:py-28">
+        <Container className="grid gap-6 sm:gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
           <div data-reveal>
             <Kicker className="text-brass-deep">Our mission</Kicker>
-            <blockquote className="mt-6">
-              <p className="display text-[2.1rem] leading-[1.1] text-ink sm:text-5xl">
+            <blockquote className="mt-4 sm:mt-6">
+              <p className="display text-[1.65rem] leading-[1.15] text-ink sm:text-5xl sm:leading-[1.1]">
                 <span aria-hidden="true" className="mr-1 text-brass">
                   “
                 </span>
@@ -43,12 +44,12 @@ export default function AboutPage() {
               </p>
             </blockquote>
           </div>
-          <div className="space-y-5 text-[1.05rem] leading-relaxed text-stone-600 lg:pt-12" data-reveal style={{ ["--d" as string]: 1 }}>
+          <div className="space-y-4 text-base leading-relaxed text-stone-600 sm:space-y-5 sm:text-[1.05rem] lg:pt-12" data-reveal style={{ ["--d" as string]: 1 }}>
             <p>
               Our strongest attributes are customer satisfaction and quality countertops. We aim to give every customer the best possible
               service, backed by industry knowledge, long-proven experience and a strong sense of responsibility.
             </p>
-            <p>
+            <p className="max-sm:hidden">
               We consider our people, our craftsmanship and our customer service our most valuable assets. Every job, from a single vanity to a
               whole-house remodel or a commercial build-out, gets the same attention from consultation and planning through fabrication,
               installation and follow-up.
@@ -61,9 +62,9 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-paper py-20 sm:py-28">
-        <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] sm:aspect-[4/3] lg:aspect-[4/5]" data-reveal>
+      <section className="bg-paper py-14 sm:py-28">
+        <Container className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.25rem] sm:aspect-[4/3] sm:rounded-[1.5rem] lg:aspect-[4/5]" data-reveal>
             <Photo name="granite-texture" alt="Close-up of a dark granite slab with sweeping gold and gray movement" sizes="(min-width: 1024px) 45vw, 100vw" fill />
           </div>
           <div>
@@ -75,7 +76,7 @@ export default function AboutPage() {
                 </>
               }
             />
-            <ul className="mt-8 space-y-5" data-reveal>
+            <ul className="mt-6 space-y-4 sm:mt-8 sm:space-y-5" data-reveal>
               {[
                 ["A large in-stock slab inventory", "Walk the yard and choose the exact slab for your job."],
                 ["A designer on staff", "Help pairing stone with cabinets, floors, tile and hardware."],
@@ -89,12 +90,12 @@ export default function AboutPage() {
                   </span>
                   <span>
                     <span className="block font-bold text-ink">{t}</span>
-                    <span className="mt-1 block leading-relaxed text-stone-600">{d}</span>
+                    <span className="mt-0.5 block text-[0.97rem] leading-relaxed text-stone-600 sm:mt-1 sm:text-base">{d}</span>
                   </span>
                 </li>
               ))}
             </ul>
-            <div className="mt-9" data-reveal>
+            <div className="mt-7 sm:mt-9" data-reveal>
               <ArrowLink href="/materials#showroom" className="text-ink">
                 Plan a showroom visit
               </ArrowLink>
@@ -103,7 +104,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="grain bg-onyx-900 py-20 text-linen sm:py-28">
+      <section className="grain bg-onyx-900 py-14 text-linen sm:py-28">
         <Container>
           <SectionHead
             dark
@@ -114,15 +115,9 @@ export default function AboutPage() {
               </>
             }
           />
-          <ul className="mt-12 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-            {strengths.map((s, i) => (
-              <li key={s.title} className="border-t border-linen/10 py-7" data-reveal style={{ ["--d" as string]: i % 3 }}>
-                <p className="kicker text-[0.62rem] text-brass">{`0${i + 1}`}</p>
-                <h3 className="mt-3 font-serif text-[1.65rem] font-semibold leading-tight">{s.title}</h3>
-                <p className="mt-3 leading-relaxed text-stone-300">{s.text}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-6 sm:mt-12">
+            <Strengths items={strengths} dark numbered cols={3} />
+          </div>
         </Container>
       </section>
 

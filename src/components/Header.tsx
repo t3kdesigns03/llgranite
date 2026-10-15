@@ -38,7 +38,7 @@ export default function Header() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 text-linen transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
-          solid || open ? "bg-onyx-950/88 shadow-[0_1px_0_rgb(184_149_90/0.18)] backdrop-blur-md" : "bg-transparent"
+          solid || open ? "bg-onyx-950/95 shadow-[0_1px_0_rgb(184_149_90/0.18)] backdrop-blur-md" : "bg-transparent"
         }`}
       >
         {/* Soft scrim so white text always reads over bright photos before the bar turns solid */}

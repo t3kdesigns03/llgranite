@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import ProjectCard from "@/components/ProjectCard";
-import QuoteCta from "@/components/QuoteCta";
 import { ArrowLeftIcon } from "@/components/icons";
 import { ArrowLink, CallButton, Container, Kicker, QuoteButton } from "@/components/ui";
 import { pageMeta } from "@/lib/meta";
@@ -48,56 +47,55 @@ export default async function ProjectPage({ params }: Props) {
         lede={p.summary}
       />
 
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-24">
         <Container>
           <Link href="/projects" className="hit inline-flex items-center gap-2 text-sm font-semibold text-stone-600 hover:text-ink">
             <ArrowLeftIcon />
             All projects
           </Link>
 
-          <div className="mt-10 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+          <div className="mt-6 grid gap-6 sm:mt-10 sm:gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
             <div data-reveal>
               <Kicker className="text-brass-deep">The project</Kicker>
-              <p className="display mt-5 text-[1.9rem] leading-[1.15] text-ink sm:text-[2.4rem]">{p.story}</p>
+              <p className="display mt-4 text-[1.5rem] leading-[1.2] text-ink sm:mt-5 sm:text-[2.4rem] sm:leading-[1.15]">{p.story}</p>
             </div>
-            <aside className="rounded-[1.25rem] border border-stone-200 bg-paper p-6 sm:p-8" data-reveal style={{ ["--d" as string]: 1 }}>
+            <aside className="rounded-[1.25rem] border border-stone-200 bg-paper p-5 sm:p-8" data-reveal style={{ ["--d" as string]: 1 }}>
               <dl className="divide-y divide-stone-200">
                 {[
                   ["Material", materialLabel[p.material]],
                   ["Space", roomLabel[p.room]],
                   ["Scope", p.scope],
                 ].map(([k, v]) => (
-                  <div key={k} className="grid grid-cols-[6rem_1fr] gap-4 py-4 first:pt-0 last:pb-0">
+                  <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-3 py-3 first:pt-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:gap-4 sm:py-4">
                     <dt className="kicker pt-1 text-[0.62rem] text-stone-500">{k}</dt>
                     <dd className="font-semibold text-ink">{v}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="mt-6 border-t border-stone-200 pt-6 text-[0.95rem] leading-relaxed text-stone-600">{material.line}</p>
+              <p className="mt-5 border-t border-stone-200 pt-5 text-[0.95rem] leading-relaxed text-stone-600 sm:mt-6 sm:pt-6">{material.line}</p>
               <ArrowLink href={`/materials#${material.id}`} className="mt-4 text-sm text-ink">
                 {`About ${material.name.toLowerCase()}`}
               </ArrowLink>
             </aside>
           </div>
 
-          {p.images.length > 1 && (
-            <div className="mt-16 grid gap-4 sm:grid-cols-2 sm:gap-6">
-              {p.images.slice(1).map((img, i) => (
-                <div
-                  key={img}
-                  data-reveal
-                  className={`overflow-hidden rounded-[1.25rem] ${p.images.length === 2 || (i === 0 && p.images.length % 2 === 0) ? "sm:col-span-2" : ""}`}
-                >
-                  <Photo name={img} alt={`${p.title}, view ${i + 2}`} sizes="(min-width: 640px) 90vw, 100vw" />
+          {/* Every photo at full brightness (the hero only shows the first one dimmed behind the title) */}
+          <div className="mt-8 grid gap-3 sm:mt-16 sm:grid-cols-2 sm:gap-6">
+            {p.images.map((img, i) => {
+              const rest = p.images.length - 1;
+              const wide = i === 0 || (rest % 2 === 1 && i === p.images.length - 1);
+              return (
+                <div key={img} data-reveal className={`overflow-hidden rounded-2xl sm:rounded-[1.25rem] ${wide ? "sm:col-span-2" : ""}`}>
+                  <Photo name={img} alt={i === 0 ? `${p.title}: ${p.summary}` : `${p.title}, view ${i + 1}`} sizes={wide ? "(min-width: 1280px) 1200px, 100vw" : "(min-width: 640px) 48vw, 100vw"} />
                 </div>
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </div>
 
-          {site.placeholderPhotos && <p className="mt-8 text-xs text-stone-500">Representative photos shown while L&amp;L&apos;s project photography is added.</p>}
+          {site.placeholderPhotos && <p className="mt-4 text-xs text-stone-500 sm:mt-8">Representative photos shown while L&amp;L&apos;s project photography is added.</p>}
 
-          <div className="mt-16 flex flex-col gap-3 rounded-[1.25rem] bg-onyx-900 p-6 text-linen sm:flex-row sm:items-center sm:justify-between sm:p-8" data-hide-sticky>
-            <p className="display text-[1.7rem] sm:text-3xl">
+          <div className="mt-10 flex flex-col gap-4 rounded-[1.25rem] bg-onyx-900 p-5 text-linen sm:mt-16 sm:gap-3 sm:p-8 sm:flex-row sm:items-center sm:justify-between sm:p-8" data-hide-sticky>
+            <p className="display text-[1.6rem] sm:text-3xl">
               Want something <em className="text-brass-light">like this?</em>
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -109,15 +107,15 @@ export default async function ProjectPage({ params }: Props) {
       </section>
 
       {related.length > 0 && (
-        <section className="border-t border-stone-200 bg-paper py-16 sm:py-24">
+        <section className="border-t border-stone-200 bg-paper py-12 sm:py-24">
           <Container>
             <div className="flex items-end justify-between gap-6">
-              <h2 className="display text-[2.2rem] text-ink sm:text-5xl">More like this</h2>
+              <h2 className="display text-[1.9rem] text-ink sm:text-5xl">More like this</h2>
               <ArrowLink href={`/projects/${next.slug}`} className="shrink-0 text-sm text-ink max-sm:hidden">
                 Next project
               </ArrowLink>
             </div>
-            <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0">
+            <div className="no-scrollbar -mx-5 mt-6 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 sm:mt-10 sm:pb-0 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0">
               {related.map((r) => (
                 <div key={r.slug} className="w-[80%] shrink-0 snap-start sm:w-auto">
                   <ProjectCard project={r} sizes="(min-width: 640px) 31vw, 80vw" titleClass="text-[1.5rem]" />
@@ -128,7 +126,6 @@ export default async function ProjectPage({ params }: Props) {
         </section>
       )}
 
-      <QuoteCta />
     </>
   );
 }

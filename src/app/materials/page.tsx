@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import QuoteCta from "@/components/QuoteCta";
 import { CheckIcon, PinIcon } from "@/components/icons";
-import { ButtonLink, Container, Kicker, QuoteButton, SectionHead } from "@/components/ui";
+import { Container, Kicker, QuoteButton, SectionHead } from "@/components/ui";
 import { pageMeta } from "@/lib/meta";
 import { compare, extras, materials, site } from "@/lib/site";
 
@@ -41,13 +41,13 @@ export default function MaterialsPage() {
       </PageHero>
 
       {materials.map((m, i) => (
-        <section key={m.id} id={m.id} className={`scroll-mt-16 py-20 sm:py-28 ${i % 2 ? "bg-paper" : ""}`}>
-          <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <section key={m.id} id={m.id} className={`py-14 sm:py-28 ${i % 2 ? "bg-paper" : ""}`}>
+          <Container className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-20">
             <div className={`relative ${i % 2 ? "lg:order-2" : ""}`} data-reveal>
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] sm:aspect-[5/4] lg:aspect-[4/5]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] sm:aspect-[5/4] sm:rounded-[1.5rem] lg:aspect-[4/5]">
                 <Photo name={m.scene} alt={`${m.name} countertops in a finished room`} sizes="(min-width: 1024px) 45vw, 100vw" fill />
               </div>
-              <div className="absolute -bottom-6 right-4 w-[38%] overflow-hidden rounded-2xl border-4 border-linen shadow-2xl sm:right-6 lg:-right-8">
+              <div className={`absolute -bottom-6 right-4 w-[30%] overflow-hidden rounded-xl border-[3px] shadow-2xl sm:right-6 sm:w-[38%] sm:rounded-2xl sm:border-4 lg:-right-8 ${i % 2 ? "border-paper" : "border-linen"}`}>
                 <div className="relative aspect-square">
                   <Photo name={m.image} alt={`${m.name} slab close-up`} sizes="(min-width: 1024px) 18vw, 38vw" fill />
                 </div>
@@ -56,20 +56,20 @@ export default function MaterialsPage() {
 
             <div data-reveal style={{ ["--d" as string]: 1 }}>
               <Kicker className="text-brass-deep">{`0${i + 1} · ${m.name}`}</Kicker>
-              <h2 className="display mt-4 text-[2.6rem] text-ink sm:text-6xl">{m.line}</h2>
-              <p className="lede mt-6 text-[1.05rem] leading-relaxed text-stone-600 sm:text-lg">{m.intro}</p>
-              <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              <h2 className="display mt-3 text-[2.1rem] text-ink sm:mt-4 sm:text-6xl">{m.line}</h2>
+              <p className="lede mt-4 text-base leading-relaxed text-stone-600 sm:mt-6 sm:text-lg">{m.intro}</p>
+              <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 sm:mt-8 sm:gap-x-8 sm:gap-y-5">
                 {m.benefits.map((b) => (
                   <li key={b.title} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-brass-deep" />
+                    <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brass-deep sm:h-5 sm:w-5" />
                     <span>
-                      <span className="block font-bold text-ink">{b.title}</span>
-                      <span className="mt-1 block text-[0.95rem] leading-relaxed text-stone-600">{b.text}</span>
+                      <span className="block text-[0.95rem] font-bold leading-snug text-ink sm:text-base">{b.title}</span>
+                      <span className="mt-1 block text-[0.95rem] leading-relaxed text-stone-600 max-sm:hidden">{b.text}</span>
                     </span>
                   </li>
                 ))}
               </ul>
-              <dl className="mt-8 grid gap-4 border-t border-stone-200 pt-6 text-[0.95rem] sm:grid-cols-2">
+              <dl className="mt-6 grid gap-4 border-t border-stone-200 pt-5 text-[0.95rem] sm:mt-8 sm:grid-cols-2 sm:pt-6">
                 <div>
                   <dt className="kicker text-[0.62rem] text-stone-500">Best for</dt>
                   <dd className="mt-1.5 leading-relaxed text-ink">{m.bestFor}</dd>
@@ -84,7 +84,7 @@ export default function MaterialsPage() {
                   </dd>
                 </div>
               </dl>
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <QuoteButton variant="onyx" label={`See ${m.name.toLowerCase()} slabs in person`} />
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function MaterialsPage() {
       ))}
 
       {/* Comparison */}
-      <section className="grain bg-onyx-900 py-20 text-linen sm:py-28">
+      <section className="grain bg-onyx-900 py-14 text-linen sm:py-28">
         <Container>
           <SectionHead
             dark
@@ -140,8 +140,8 @@ export default function MaterialsPage() {
       </section>
 
       {/* Showroom extras */}
-      <section id="showroom" className="scroll-mt-16 py-20 sm:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+      <section id="showroom" className="py-14 sm:py-28">
+        <Container className="grid gap-6 sm:gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <div>
             <SectionHead
               kicker="Also in the showroom"
@@ -152,26 +152,28 @@ export default function MaterialsPage() {
               }
               lede="Countertops are our focus, but you shouldn't have to make five stops to finish a kitchen. Pick out the pieces that go with your stone in one visit."
             />
-            <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-[1.25rem]" data-reveal>
+            <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-[1.25rem] max-sm:hidden" data-reveal>
               <Photo name="sink-faucet" alt="Undermount stainless sink with a black faucet in a granite countertop" sizes="(min-width: 1024px) 38vw, 100vw" fill />
             </div>
           </div>
-          <ul className="grid content-start gap-x-10 sm:grid-cols-2">
+          <ul className="grid grid-cols-2 content-start gap-x-4 sm:gap-x-10">
             {extras.map((e, i) => (
-              <li key={e.title} className="border-t border-stone-200 py-7" data-reveal style={{ ["--d" as string]: i % 2 }}>
-                <h3 className="font-serif text-[1.7rem] font-semibold text-ink">{e.title}</h3>
-                <p className="mt-3 leading-relaxed text-stone-600">{e.text}</p>
+              <li key={e.title} className="border-t border-stone-200 py-5 sm:py-7" data-reveal style={{ ["--d" as string]: i % 2 }}>
+                <h3 className="font-serif text-[1.3rem] font-semibold leading-tight text-ink sm:text-[1.7rem]">{e.title}</h3>
+                <p className="mt-2 text-[0.88rem] leading-relaxed text-stone-600 sm:mt-3 sm:text-base">{e.text}</p>
               </li>
             ))}
-            <li className="pt-4 sm:col-span-2" data-reveal>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <QuoteButton label="Book a showroom visit" />
-                <ButtonLink href={site.links.directions} variant="ghost" target="_blank" rel="noopener noreferrer">
-                  <PinIcon className="h-[1.1rem] w-[1.1rem]" />
-                  Directions
-                </ButtonLink>
-              </div>
-              <p className="mt-4 text-sm text-stone-600">{site.hours.note}</p>
+            <li className="col-span-2 border-t border-stone-200 pt-5 sm:pt-7" data-reveal>
+              <p className="text-[0.95rem] leading-relaxed text-stone-600">{site.hours.note}</p>
+              <a
+                href={site.links.directions}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hit mt-3 inline-flex items-center gap-2 font-semibold text-ink underline decoration-brass underline-offset-4"
+              >
+                <PinIcon className="h-4 w-4 text-brass-deep" />
+                {`Directions to ${site.address.street}`}
+              </a>
             </li>
           </ul>
         </Container>
